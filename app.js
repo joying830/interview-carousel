@@ -1,5 +1,5 @@
 // ---------- CONFIGURE THIS URL to your Apps Script JSON endpoint ----------
-const API_URL = 'https://script.google.com/macros/s/AKfycbwLLfVYIl_lfs5dh7OBJEpJHpr8ju1mrI-IPtEBV79RrxgVTlyCwBVzJ3eXhRcrBB9iow/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyxA7XaH2Yk_-rjQW3FeHYplH1ElhA7mKjuwpDMONEuRduMj8zMDZTMYPPzgrtRGuHW5w/exec';
 
 // 在 URL 後面加上 timestamp，確保每次請求都是新的
 async function fetchData() {
