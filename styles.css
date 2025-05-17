@@ -1,0 +1,135 @@
+/* --- General Styles based on reference --- */
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background-color: #1F1D53;
+  color: #FFFFFF;
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 16px;
+}
+
+/* --- Background Effects --- */
+.circuit-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.circuit-line      { position: absolute; background-color: #4C237C; box-shadow: 0 0 5px #01529F; }
+.circuit-dot       { position: absolute; width: 6px; height: 6px; border-radius: 50%; background-color: #28C4FF; box-shadow: 0 0 8px #28C4FF; }
+.left-gradient     {
+  position: fixed; top: 0; left: 0; width: 15%; height: 100%;
+  background: linear-gradient(90deg, #053D88 0%, rgba(5,61,136,0) 100%);
+  z-index: 1; pointer-events: none;
+}
+
+/* --- Header --- */
+.main-page-header {
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+}
+.main-page-title {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  font-weight: 700;
+  text-shadow: 0 4px 8px #6B257F;
+  margin: 0;
+}
+
+/* --- Slideshow container & slides --- */
+.slideshow-master-container {
+  width: 100%;
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+  padding: 5px 15px 15px;
+  box-sizing: border-box;
+}
+.column-group-slide {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none; opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  box-sizing: border-box;
+}
+.column-group-slide.active {
+  display: block; opacity: 1; z-index: 5;
+}
+
+/* --- Grid inside each slide --- */
+.page-container-in-slide {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  gap: 12px;
+  width: 100%; height: 100%;
+  overflow-x: auto;
+}
+
+/* --- Column/card styles --- */
+.column {
+  min-width: 0;
+  background-color: rgba(76,35,124,0.7);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(164,141,205,0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.column-title {
+  background: linear-gradient(135deg,#2956A8,#4C237C);
+  color: #FFF;
+  font-weight: 700;
+  text-align: center;
+  padding: .85rem 1rem;
+  border-bottom: 2px solid #28C4FF;
+  position: relative;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.column-title::after {
+  content: ''; position: absolute; top:0; left:0; width:100%; height:1px;
+  background-color: #28C4FF; box-shadow: 0 0 8px #28C4FF;
+}
+.column-content {
+  background-color: rgba(31,29,83,0.8);
+  overflow-y: auto; overflow-x: hidden;
+  flex-grow: 1; padding: 12px;
+  font-size: 1.1rem; line-height: 1.5;
+}
+
+/* Table inside column */
+.column-content table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+}
+.column-content th {
+  background: linear-gradient(135deg,#01529F,#2956A8);
+  position: sticky; top:0; z-index:10;
+  border-bottom:2px solid #28C4FF;
+  font-weight:600; text-align:center;
+  padding:.8rem; font-size:1.15rem; color:#FFF;
+}
+.column-content td {
+  padding:.8rem; vertical-align:middle;
+  text-align:center; text-shadow:0 1px 2px rgba(0,0,0,0.5);
+  color:#EDEEF7; font-size:1.05rem;
+}
+.column-content tr:nth-child(odd)  { background-color: rgba(31,29,83,0.9); }
+.column-content tr:nth-child(even) { background-color: rgba(76,35,124,0.7); }
+.column-content tr:hover { background-color: rgba(108,37,127,0.7); }
+
+/* Status colors & messages */
+.text-successGreen { color: #4ade80; font-weight:600; }
+.error-message, .no-data, .static-message-content {
+  text-align:center; color:#EDEEF7;
+  margin-top:25px; padding:20px;
+  font-style:italic; font-size:1.15rem; line-height:1.6;
+}
+.static-message-content {
+  font-style:normal; font-weight:normal;
+}
