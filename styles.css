@@ -61,10 +61,14 @@ body {
 
 /* --- Grid inside each slide --- */
 .page-container-in-slide {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  gap: 12px;
-  width: 100%; height: 100%;
+   display: grid;
+   /* 1. 一次 10 欄，並且讓每一格最小 0、最大 1fr，自由伸縮 */
+   grid-template-columns: repeat(10, minmax(0, 1fr));
+   gap: 12px;        /* 欄間距仍保留 */
+   width: 100%;
+   height: 100%;
+   /* 2. 既然每一格都能撐滿，就不需要左右捲動 */
+   overflow-x: hidden;
 }
 
 /* --- Column/card styles --- */
