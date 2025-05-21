@@ -93,7 +93,7 @@ function renderSlides(slides) {
                       ${col.data.map(row => `
                         <tr>
                           <td>${row.B}</td>
-                          <td class="${row.C==='已完成面試'?'text-successGreen':''}">${row.C}</td>
+                          <td class="${row.C==='V'?'text-successGreen':''}">${row.C}</td>
                         </tr>`).join('')}
                     </tbody>
                   </table>`;
