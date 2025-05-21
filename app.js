@@ -58,11 +58,11 @@ async function loadData() {
   try {
     const { title, slides } = await fetchData();
     document.querySelector('.main-page-title').textContent = title;
-    renderSlides(slides);
-  } catch (e) {
-    console.error('載入資料失敗：', e);
-  }
+    updateSlidesData(slides);      // 只更新欄位資料
+    // 不要在這裡呼叫 renderSlides() 也不要重啟輪播
+  } catch (e) { console.error(e); }
 }
+
 
 // 3. 動態產生 slides
 function renderSlides(slides) {
