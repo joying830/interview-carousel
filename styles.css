@@ -100,17 +100,18 @@ body {
   background-color: #28C4FF; box-shadow: 0 0 8px #28C4FF;
 }
 /* 隱藏所有 .column-content 的捲軸 */
+/* 保留自動捲動，但隱藏捲軸 */
 .column-content {
-  /* Firefox */
-  scrollbar-width: none;
-  /* IE 10+ */
-  -ms-overflow-style: none;
+  overflow-y: auto;       /* 一定要留，才能自動滾動 */
+  scrollbar-width: none;   /* Firefox */
+  -ms-overflow-style: none;/* IE 10+ */
 }
-/* Chrome、Safari、Edge */
+
+/* Chrome、Safari、Edge: 直接不渲染 scrollbar */
 .column-content::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  display: none;
 }
+
 
 /* Table inside column */
 .column-content table {
@@ -126,7 +127,7 @@ body {
 .column-content td {
   padding:.8rem; vertical-align:middle;
   text-align:center; text-shadow:0 1px 2px rgba(0,0,0,0.5);
-  color:#EDEEF7; font-size:1.2rem;
+  color:#EDEEF7; font-size:1.5rem;
 }
 .column-content tr:nth-child(odd)  { background-color: rgba(31,29,83,0.9); }
 .column-content tr:nth-child(even) { background-color: rgba(76,35,124,0.7); }
