@@ -169,5 +169,5 @@ window.addEventListener('resize', () => {
 document.addEventListener('DOMContentLoaded', () => {
   initPageStyles();
   loadData();
-  setInterval(loadData, 60000);  // 每 60 秒重新抓一次資料
+  setInterval(loadData, 30000);  // 每 30 秒重新抓一次資料
 });
