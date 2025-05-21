@@ -120,7 +120,7 @@ body {
 .column-content td {
   padding:.8rem; vertical-align:middle;
   text-align:center; text-shadow:0 1px 2px rgba(0,0,0,0.5);
-  color:#EDEEF7; font-size:1.05rem;
+  color:#EDEEF7; font-size:1.2rem;
 }
 .column-content tr:nth-child(odd)  { background-color: rgba(31,29,83,0.9); }
 .column-content tr:nth-child(even) { background-color: rgba(76,35,124,0.7); }
