@@ -1,6 +1,10 @@
 // ---------- CONFIGURE THIS URL to your Apps Script JSON endpoint ----------
 const API_URL = 'https://script.google.com/macros/s/AKfycbwGLaO9R1wVwEom8PY3Gk40HJA3P_jD2NQQpugdEH7xxfvcGYm3VwoHVRM_P4oYPnl7CQ/exec';
 
+// 狀態變數
+let isFirstLoad = true;
+let currentSlideIdx = 0;
+
 // 在 URL 後面加上 timestamp，確保每次請求都是新的
 async function fetchData() {
   const url = `${API_URL}?t=${Date.now()}`;
@@ -12,7 +16,6 @@ async function fetchData() {
 function createCircuitBackground() {
   const circuitBg = document.getElementById('circuitBackground');
   circuitBg.innerHTML = '';
-  // 水平線
   for (let i = 0; i < 15; i++) {
     const line = document.createElement('div');
     line.className = 'circuit-line';
@@ -26,7 +29,6 @@ function createCircuitBackground() {
     }
     circuitBg.appendChild(line);
   }
-  // 垂直線
   for (let i = 0; i < 15; i++) {
     const line = document.createElement('div');
     line.className = 'circuit-line';
@@ -40,7 +42,6 @@ function createCircuitBackground() {
     }
     circuitBg.appendChild(line);
   }
-  // 點
   for (let i = 0; i < 30; i++) {
     const dot = document.createElement('div');
     dot.className = 'circuit-dot';
@@ -53,18 +54,25 @@ function initPageStyles() {
   createCircuitBackground();
 }
 
-// 2. Fetch JSON + render slides
+// 2. 讀取資料並渲染
 async function loadData() {
   try {
     const { title, slides } = await fetchData();
     document.querySelector('.main-page-title').textContent = title;
-    updateSlidesData(slides);      // 只更新欄位資料
-    // 不要在這裡呼叫 renderSlides() 也不要重啟輪播
-  } catch (e) { console.error(e); }
+
+    if (isFirstLoad) {
+      renderSlides(slides);
+      startCarousel();
+      isFirstLoad = false;
+    } else {
+      updateSlidesData(slides);
+    }
+  } catch (e) {
+    console.error('載入資料失敗：', e);
+  }
 }
 
-
-// 3. 動態產生 slides
+// 3a. 首次把整個輪播結構建好
 function renderSlides(slides) {
   const container = document.getElementById('slideshowMasterContainer');
   container.innerHTML = '';
@@ -109,8 +117,42 @@ function renderSlides(slides) {
     slideEl.appendChild(page);
     container.appendChild(slideEl);
   });
+}
 
-  startCarousel();
+// 3b. 後續只更新每格的資料，不重置輪播
+function updateSlidesData(slides) {
+  slides.forEach((slide, i) => {
+    const slideEl = document.getElementById(`slide-group-${i}`);
+    if (!slideEl) return;
+
+    slide.columnsData.forEach((col, j) => {
+      const colEl = slideEl.querySelectorAll('.column')[j];
+      if (!colEl) return;
+      const contentEl = colEl.querySelector('.column-content');
+
+      let inner = '';
+      if (col.error) {
+        inner = `<p class="error-message">讀取「${col.title}」失敗：${col.error}</p>`;
+      } else if (col.staticMessage) {
+        inner = `<p class="static-message-content">${col.staticMessage}</p>`;
+      } else if (col.data && col.data.length) {
+        inner = `<table>
+                   <thead><tr><th>姓　　名</th><th>完成面試</th></tr></thead>
+                   <tbody>
+                     ${col.data.map(row => `
+                       <tr>
+                         <td>${row.B}</td>
+                         <td class="${row.C==='V'?'text-successGreen':''}">${row.C}</td>
+                       </tr>`).join('')}
+                   </tbody>
+                 </table>`;
+      } else {
+        inner = `<p class="no-data">（目前沒有「${col.originalSheetName}」的資料）</p>`;
+      }
+
+      contentEl.innerHTML = inner;
+    });
+  });
 }
 
 // 4. 自動捲動 & 輪播
@@ -144,18 +186,20 @@ function startAutoScrollOnSlide(slideEl) {
 }
 function startCarousel() {
   const slides = document.querySelectorAll('.column-group-slide');
-  let idx = 0;
   const show = i => {
-    slides.forEach((el,j) => {
+    slides.forEach((el, j) => {
       const active = i === j;
       el.classList.toggle('active', active);
       el.setAttribute('aria-hidden', active ? 'false' : 'true');
       if (active) startAutoScrollOnSlide(el);
     });
+    currentSlideIdx = i;
   };
   show(0);
   if (slides.length > 1) {
-    setInterval(() => { idx = (idx+1)%slides.length; show(idx); }, SLIDE_DURATION);
+    setInterval(() => {
+      show((currentSlideIdx + 1) % slides.length);
+    }, SLIDE_DURATION);
   }
 }
 
@@ -169,5 +213,5 @@ window.addEventListener('resize', () => {
 document.addEventListener('DOMContentLoaded', () => {
   initPageStyles();
   loadData();
-  setInterval(loadData, 30000);  // 每 30 秒重新抓一次資料
+  setInterval(loadData, 60000);  // 每 60 秒重新抓一次資料
 });
