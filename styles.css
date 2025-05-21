@@ -99,18 +99,20 @@ body {
   content: ''; position: absolute; top:0; left:0; width:100%; height:1px;
   background-color: #28C4FF; box-shadow: 0 0 8px #28C4FF;
 }
-/* 隱藏所有 .column-content 的捲軸 */
-/* 保留自動捲動，但隱藏捲軸 */
 .column-content {
-  overflow-y: auto;       /* 一定要留，才能自動滾動 */
-  scrollbar-width: none;   /* Firefox */
-  -ms-overflow-style: none;/* IE 10+ */
+  /* 1. 讓它在 .column 這個 flex container 裡撐滿剩下的高度 */
+  flex: 1 1 auto;         
+  /* 2. 保留垂直捲動功能 */
+  overflow-y: auto;       
+  /* 3. 隱藏滾動條 */
+  scrollbar-width: none;   
+  -ms-overflow-style: none;
 }
 
-/* Chrome、Safari、Edge: 直接不渲染 scrollbar */
 .column-content::-webkit-scrollbar {
   display: none;
 }
+
 
 
 /* Table inside column */
