@@ -141,16 +141,23 @@ function updateSlidesData(slides) {
       } else if (col.staticMessage) {
         inner = `<p class="static-message-content">${col.staticMessage}</p>`;
       } else if (col.data && col.data.length) {
+
         inner = `<table>
-                   <thead><tr><th>姓　　名</th><th>完成面試</th></tr></thead>
-                   <tbody>
-                     ${col.data.map(row => `
-                       <tr>
-                         <td>${row.B}</td>
-                         <td class="${row.C==='V'?'text-successGreen':''}">${row.C}</td>
-                       </tr>`).join('')}
-                   </tbody>
-                 </table>`;
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>完成<br>面試</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${col.data.map(row => `
+            <tr>
+              <td>${row.B}</td>
+              <td class="${row.C==='V'?'text-successGreen':''}">${row.C}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+
       } else {
         inner = `<p class="no-data">（目前沒有「${col.originalSheetName}」的資料）</p>`;
       }
