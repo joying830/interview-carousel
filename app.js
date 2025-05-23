@@ -98,7 +98,7 @@ function renderSlides(slides) {
         inner += `<table>
             <thead>
               <tr>
-                <th class="vertical-header">姓<br>名</th>
+                <th>姓名</th>
                 <th>完成<br>面試</th>
               </tr>
             </thead>
