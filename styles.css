@@ -127,14 +127,7 @@ body {
   padding:.8rem; font-size:1.15rem; color:#FFF;
   white-space: normal;
 }
-/* 「姓名」垂直顯示 */
-.column-content th.vertical-header {
-  /* 改为 vertical-lr，文字就会从上到下正常排列 */
-  writing-mode: vertical-lr;
-  text-orientation: upright;
-  white-space: nowrap;    /* 防止自动换行 */
-  text-align: center;
-}
+
 .column-content td {
   padding:.8rem; vertical-align:middle;
   text-align:center; text-shadow:0 1px 2px rgba(0,0,0,0.5);
