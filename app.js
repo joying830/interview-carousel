@@ -96,8 +96,13 @@ function renderSlides(slides) {
         inner += `<p class="static-message-content">${col.staticMessage}</p>`;
       } else if (col.data && col.data.length) {
         inner += `<table>
-                    <thead><tr><th>姓　　名</th><th>完成面試</th></tr></thead>
-                    <tbody>
+            <thead>
+              <tr>
+                <th class="vertical-header">姓<br>名</th>
+                <th>完成<br>面試</th>
+              </tr>
+            </thead>
+            <tbody>
                       ${col.data.map(row => `
                         <tr>
                           <td>${row.B}</td>
