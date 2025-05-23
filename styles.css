@@ -129,10 +129,10 @@ body {
 }
 /* 「姓名」垂直顯示 */
 .column-content th.vertical-header {
-  /* 直排文字 */
-  writing-mode: vertical-rl;
+  /* 改为 vertical-lr，文字就会从上到下正常排列 */
+  writing-mode: vertical-lr;
   text-orientation: upright;
-  /* 置中 */
+  white-space: nowrap;    /* 防止自动换行 */
   text-align: center;
 }
 .column-content td {
