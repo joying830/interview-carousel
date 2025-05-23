@@ -125,7 +125,7 @@ body {
   border-bottom:2px solid #28C4FF;
   font-weight:600; text-align:center;
   padding:.8rem; font-size:1.5rem; color:#FFF;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .column-content td {
