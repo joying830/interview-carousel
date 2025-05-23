@@ -92,7 +92,7 @@ body {
   padding: .85rem 1rem;
   border-bottom: 2px solid #28C4FF;
   position: relative;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   flex-shrink: 0;
 }
 .column-title::after {
@@ -125,6 +125,15 @@ body {
   border-bottom:2px solid #28C4FF;
   font-weight:600; text-align:center;
   padding:.8rem; font-size:1.15rem; color:#FFF;
+  white-space: normal;
+}
+/* 「姓名」垂直顯示 */
+.column-content th.vertical-header {
+  /* 直排文字 */
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  /* 置中 */
+  text-align: center;
 }
 .column-content td {
   padding:.8rem; vertical-align:middle;
